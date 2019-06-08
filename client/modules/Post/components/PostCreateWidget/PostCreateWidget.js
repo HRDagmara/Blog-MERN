@@ -30,7 +30,30 @@ export class PostCreateWidget extends Component {
       </div>
     );
   }
+
+  renderPostForm = () => {
+    return (
+      <div className={styles['form-content']}>
+        <h2 className={styles['form-title']}><FormattedMessage id="editPost" /></h2>
+        <input placeholder={this.props.intl.messages.authorName} className={styles['form-field']} name="name" value={this.state.name} onChange={this.handleInputChange}/>
+        <input placeholder={this.props.intl.messages.postTitle} className={styles['form-field']} name="title" value={this.state.title} onChange={this.handleInputChange}/>
+        <textarea placeholder={this.props.intl.messages.postContent} className={styles['form-field']} name="content" value={this.state.content} onChange={this.handleInputChange}/>
+        <a className={styles['post-submit-button']} href="#" onClick={this.handleEditPost}><FormattedMessage id="submit" /></a>
+      </div>
+    );
+  };
+
+  renderPost = () => {
+    return (
+      <div className={`${styles['single-post']} ${styles['post-detail']}`}>
+        <h3 className={styles['post-title']}>{this.props.post.title}</h3>
+        <p className={styles['author-name']}><FormattedMessage id="by" /> {this.props.post.name}</p>
+        <p className={styles['post-desc']}>{this.props.post.content}</p>
+      </div>
+    );
+  };
 }
+
 
 PostCreateWidget.propTypes = {
   addPost: PropTypes.func.isRequired,

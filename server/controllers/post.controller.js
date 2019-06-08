@@ -78,3 +78,52 @@ export function deletePost(req, res) {
     });
   });
 }
+
+//Edit post
+
+export function editPost(req, res) {
+  Post.update({ cuid: req.params.cuid }, req.body.post) .exec((err, post) => {
+    if (err) {
+      res.status(500) .send(err);
+    }
+    res.json({ post }); 
+  });
+}
+
+
+/**
+ * Thumb up a post
+ * @param req
+ * @param res
+ * @returns void
+ */
+export function thumbUpPost(req, res) {
+  Post.findOne({ cuid: req.params.cuid }).exec((err, post) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+
+    post.remove(() => {
+      res.status(200).end();
+    });
+  });
+}
+
+/**
+ * Thumb down a post
+ * @param req
+ * @param res
+ * @returns void
+ */
+export function thumbDownPost(req, res) {
+  Post.findOne({ cuid: req.params.cuid }).exec((err, post) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+
+    post.remove(() => {
+      res.status(200).end();
+    });
+  });
+}
+
